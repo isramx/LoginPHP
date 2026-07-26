@@ -1,8 +1,8 @@
 <?php
-$server = "mysql"; // Servidor de la base de datos
-$user = "root"; // Usuario de MySQL (por defecto en XAMPP es "root")
-$pass = "123456"; // Contraseña (en XAMPP usualmente está vacía)
-$bd = "phplogin"; // Nombre de la base de datos
+$server = "primary.mysql--lkg5gb9wtp9l.addon.code.run";
+$user = "c7fe7d25f5a22a90";
+$pass = "821c212ad130366ea9c1b35dfdc60c";
+$bd = "cd6542194613";
 
 $conn = new mysqli($server, $user, $pass, $bd);
 
