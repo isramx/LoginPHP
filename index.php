@@ -1,30 +1,14 @@
 <?php
 include("conexion.php");
  session_start();
- if (isset($_SESSION['id_usuario'])) {
-	header("Location: admin.php");
-}
-//Login
-//if (!empty($_POST)) {
-if (isset($_POST["ingresar"]) ) {
-	$usuario = mysqli_real_escape_string($conexion,$_POST['user']); 
-	$password = mysqli_real_escape_string($conexion,$_POST['pass']); 
-	$password_encriptada = sha1($password);
-	$sql = "SELECT idusuarios FROM usuarios
-				WHERE usuario = '$usuario' AND password = '$password_encriptada' ";
-	$resultado = $conexion->query($sql);
-	$rows = $resultado->num_rows;
-	if ($rows > 0) {
-		$row = $resultado->fetch_assoc();
-		$_SESSION['id_usuario'] = $row["idusuarios"];
-		$_SESSION['nombre_usuario'] = $usuario; 
-		header("Location: admin.php");
-	}else{
-		echo "<script>
-			alert('Usuario o Password Incorrecto'); 
-			window.location = 'index.php';
-		</script>";
-	}
+ if (isset($_SESSION['id_usuario'], $_SESSION['tipo_usuario'])) {
+    if ($_SESSION['tipo_usuario'] === 'admin') {
+        header("Location: admin.php");
+    } else {
+        header("Location: usuario.php");
+    }
+
+    exit;
 }
 
 //Registrar usuario
@@ -45,11 +29,17 @@ if (isset($_POST["registrar"])) {
 	</script>";
 	}else{
 		//insertar informacion del usuario 
-		$sqlusuario = "INSERT INTO usuarios( 
-			Nombre, Correo, Usuario, Password)
-				VALUES ('$nombre', '$correo', '$usuario', '$password_encriptada')";
+		$sqlusuario = "INSERT INTO usuarios(
+    Nombre, Correo, Usuario, Password, tipo_usuario)
+    VALUES (
+        '$nombre',
+        '$correo',
+        '$usuario',
+        '$password_encriptada',
+        'usuario'
+    )";
 	$resultadousuario = $conexion->query($sqlusuario); 
-	if ($resultadousuario > 0) {
+	if ($resultadousuario) {
 		echo "<script>
 			alert('Registro Exitoso'); 
 			window.location = 'index.php';
@@ -61,6 +51,47 @@ if (isset($_POST["registrar"])) {
 		</script>";
 	}
 	}
+}
+
+// Iniciar sesión
+if (isset($_POST["ingresar"])) {
+
+    $usuario = mysqli_real_escape_string($conexion, $_POST["user"]);
+    $password = mysqli_real_escape_string($conexion, $_POST["pass"]);
+    $password_encriptada = sha1($password);
+
+    $sql = "SELECT idusuarios, Nombre, tipo_usuario
+            FROM usuarios
+            WHERE Usuario = '$usuario'
+            AND Password = '$password_encriptada'";
+
+    $resultado = $conexion->query($sql);
+
+    if ($resultado && $resultado->num_rows > 0) {
+
+        $row = $resultado->fetch_assoc();
+
+        $_SESSION['id_usuario'] = $row['idusuarios'];
+        $_SESSION['nombre_usuario'] = $row['Nombre'];
+        $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
+
+        if ($row['tipo_usuario'] == "admin") {
+            header("Location: admin.php");
+        } else {
+            header("Location: usuario.php");
+        }
+
+        exit;
+
+    } else {
+
+        echo "<script>
+                alert('Usuario o contraseña incorrectos');
+                window.location='index.php';
+              </script>";
+
+    }
+
 }
 
 ?>
