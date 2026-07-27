@@ -71,6 +71,11 @@ if (isset($_POST["ingresar"])) {
 
         $row = $resultado->fetch_assoc();
 
+        echo "<pre>";
+print_r($row);
+echo "</pre>";
+exit;
+
         $_SESSION['id_usuario'] = $row['idusuarios'];
         $_SESSION['nombre_usuario'] = $row['Nombre'];
         $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
@@ -161,11 +166,11 @@ if (isset($_POST["ingresar"])) {
 
 											<div class="space-6"></div>
 
-											<form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST" >
+											<form method="POST">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control"  name="user"placeholder="Usuario" />
+															<input type="text" class="form-control"  name="user" placeholder="Usuario" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -273,7 +278,7 @@ if (isset($_POST["ingresar"])) {
 				</h4>
 	<div class="space-6"></div>
 		<p>Ingresa los datos solicitados acontinuacion: </p>
-		<form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST" >
+	<form method="POST">
 			<fieldset>
 			            <label class="block clearfix">
 					<span class="block input-icon input-icon-right">
