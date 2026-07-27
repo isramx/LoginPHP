@@ -71,10 +71,6 @@ if (isset($_POST["ingresar"])) {
 
         $row = $resultado->fetch_assoc();
 
-        echo "<pre>";
-print_r($row);
-echo "</pre>";
-exit;
 
         $_SESSION['id_usuario'] = $row['idusuarios'];
         $_SESSION['nombre_usuario'] = $row['Nombre'];
