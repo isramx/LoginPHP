@@ -235,7 +235,7 @@ if (isset($_POST["ingresar"])) {
 
 											<div class="space-6"></div>
 											<p>
-												Ungresa tu correo electronico para recibir las instrucciones
+												Ingresa tu correo electronico para recibir las instrucciones
 											</p>
 
 						<form>
@@ -247,11 +247,18 @@ if (isset($_POST["ingresar"])) {
 									</span>
 								</label>
 							<div class="clearfix">
-								<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
-								<i class="ace-icon fa fa-lightbulb-o"></i>
-								<span class="bigger-110">Enviar</span>
-								</button>
-							</div>
+
+    <a href="#" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#modalPrivacidad">
+        <i class="ace-icon fa fa-shield"></i>
+        Aviso de Privacidad
+    </a>
+
+    <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+        <i class="ace-icon fa fa-lightbulb-o"></i>
+        <span class="bigger-110">Enviar</span>
+    </button>
+
+</div>
 							</fieldset>
 						</form>
 				</div><!-- /.widget-main -->
@@ -415,5 +422,49 @@ if (isset($_POST["ingresar"])) {
 
 			});
 		</script>
+		<!-- Modal Aviso de Privacidad -->
+<div class="modal fade" id="modalPrivacidad" tabindex="-1" role="dialog" aria-labelledby="modalPrivacidadLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalPrivacidadLabel">Aviso de Privacidad</h4>
+            </div>
+
+            <div class="modal-body">
+                <p style="text-align:justify;">
+                    Los datos personales proporcionados en este sistema serán recopilados,
+                    almacenados y procesados por la
+                    <strong>Universidad Tecnológica de Santa Catarina</strong>,
+                    únicamente con fines académicos y para el funcionamiento del sistema.
+                </p>
+
+                <p style="text-align:justify;">
+                    La información será tratada de manera confidencial y utilizada
+                    exclusivamente para la autenticación de usuarios y la administración
+                    de la aplicación.
+                </p>
+
+                <hr>
+
+                <p>
+                    <strong>Desarrollador del sistema:</strong><br>
+                    Israel Picazo Alvarado<br>
+                    Correo: adolfopicazo99@gmail.com
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Aceptar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
 	</body>
 </html>
